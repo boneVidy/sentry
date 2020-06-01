@@ -3,11 +3,14 @@ from __future__ import absolute_import
 import json
 
 from sentry.api.event_search import get_filter, resolve_field_list
-from sentry.snuba.discover import resolve_discover_aliases
 from sentry.snuba.models import QueryDatasets, QuerySubscription
 from sentry.tasks.base import instrumented_task
 from sentry.utils import metrics
-from sentry.utils.snuba import _snuba_pool, SnubaError
+from sentry.utils.snuba import (
+    _snuba_pool,
+    SnubaError,
+    resolve_discover_aliases,
+)
 
 
 # TODO: If we want to support security events here we'll need a way to
