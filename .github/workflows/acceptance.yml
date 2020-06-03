@@ -24,7 +24,7 @@ jobs:
       strategy:
         fail-fast: true
         matrix:
-          instance: [0, 1, 2]
+          instance: [0]
 
       env:
         PIP_DISABLE_PIP_VERSION_CHECK: on
