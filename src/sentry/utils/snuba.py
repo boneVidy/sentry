@@ -819,7 +819,7 @@ def _aliased_query_impl(
             derived_columns.append(aggregation[2])
 
     if conditions:
-        condition_resolver = condition_resolver or resolve_column
+        condition_resolver = condition_resolver or resolve_column(dataset)
         column_resolver = functools.partial(condition_resolver, dataset=dataset)
         for (i, condition) in enumerate(conditions):
             replacement = resolve_condition(condition, column_resolver)
