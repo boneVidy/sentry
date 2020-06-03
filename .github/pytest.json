@@ -9,8 +9,8 @@
           "line": 2
         },
         {
-          "regex": "^\\s*(.*)$",
-          "message": 0
+          "regexp": "^\\s*(.*)$",
+          "message": 1
         }
       ]
     }
