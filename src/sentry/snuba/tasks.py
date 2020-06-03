@@ -9,7 +9,9 @@ from sentry.utils import metrics
 from sentry.utils.snuba import (
     _snuba_pool,
     SnubaError,
-    resolve_discover_aliases,
+    resolve_snuba_aliases,
+    resolve_column,
+    Dataset,
 )
 
 
@@ -116,9 +118,12 @@ def delete_subscription_from_snuba(query_subscription_id, **kwargs):
 
 
 def build_snuba_filter(dataset, query, aggregate, environment, params=None):
+    resolve_func = (
+        resolve_column(Dataset.Events) if dataset == "events" else resolve_column(Dataset.Discover)
+    )
     snuba_filter = get_filter(query, params=params)
     snuba_filter.update_with(resolve_field_list([aggregate], snuba_filter, auto_fields=False))
-    snuba_filter = resolve_discover_aliases(snuba_filter)[0]
+    snuba_filter = resolve_snuba_aliases(snuba_filter, resolve_func)[0]
     if environment:
         snuba_filter.conditions.append(["environment", "=", environment.name])
     snuba_filter.conditions = apply_dataset_conditions(dataset, snuba_filter.conditions)
