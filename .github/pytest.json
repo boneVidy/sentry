@@ -4,13 +4,17 @@
       "owner": "pytest",
       "pattern": [
         {
+          "regexp": "^\\s*________________________\\s*(.*)\\s*________________________$"
+        },
+        {
           "regexp": "^\\s*File\\s\"(.*)\",\\sline\\s(\\d+),\\sin\\s(.*)$",
           "file": 1,
           "line": 2
         },
         {
-          "regexp": "^\\s*(.*)$",
-          "message": 1
+          "regexp": "^((.*)Error:\\s(.*))$",
+          "message": 1,
+          "loop": true
         }
       ]
     }
