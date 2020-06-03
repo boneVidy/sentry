@@ -7,10 +7,13 @@
           "regexp": "^\\s*________________________\\s*(.*)\\s*________________________$"
         },
         {
+          "regexp": "^Traceback (most recent call last):$"
+        },
+
+        {
           "regexp": "^\\s*File\\s\"(.*)\",\\sline\\s(\\d+),\\sin\\s(.*)$",
           "file": 1,
-          "line": 2,
-          "loop": true
+          "line": 2
         },
         {
           "regexp": "^((.*)Error:\\s(.*))$",
