@@ -806,12 +806,13 @@ def _aliased_query_impl(
         raise ValueError("A dataset is required, and is no longer automatically detected.")
 
     derived_columns = []
+    resolve_func = resolve_column(dataset)
     if selected_columns:
         for (i, col) in enumerate(selected_columns):
             if isinstance(col, (list, tuple)):
                 derived_columns.append(col[2])
             else:
-                selected_columns[i] = resolve_column(dataset)(col)
+                selected_columns[i] = resolve_func(col)
         selected_columns = [c for c in selected_columns if c]
 
     if aggregations:
@@ -819,7 +820,7 @@ def _aliased_query_impl(
             derived_columns.append(aggregation[2])
 
     if conditions:
-        condition_resolver = condition_resolver or resolve_column(dataset)
+        condition_resolver = condition_resolver or resolve_func
         column_resolver = functools.partial(condition_resolver, dataset=dataset)
         for (i, condition) in enumerate(conditions):
             replacement = resolve_condition(condition, column_resolver)
@@ -832,7 +833,7 @@ def _aliased_query_impl(
         for (i, order) in enumerate(orderby):
             order_field = order.lstrip("-")
             if order_field not in derived_columns:
-                order_field = resolve_column(dataset)(order_field)
+                order_field = resolve_func(order_field)
             updated_order.append(u"{}{}".format("-" if order.startswith("-") else "", order_field))
         orderby = updated_order
 
