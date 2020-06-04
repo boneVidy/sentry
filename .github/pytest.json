@@ -4,7 +4,7 @@
       "owner": "pytest",
       "pattern": [
         {
-          "regexp": "^\\s*Traceback \\(most recent call last\\):"
+          "regexp": "^\\s*Traceback"
         },
         {
           "regexp": "^\\s*File\\s\"(.*)\",\\sline\\s(\\d+),\\sin\\s(.*)$",
