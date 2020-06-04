@@ -9,12 +9,8 @@
         {
           "regexp": "^\\s*File\\s\"(.*)\",\\sline\\s(\\d+),\\sin\\s(.*)$",
           "file": 1,
-          "line": 2
-        },
-        {
-          "regexp": "^((.*)Error:\\s(.*))$",
-          "message": 1,
-          "loop": true
+          "line": 2,
+          "message": 3
         }
       ]
     }
